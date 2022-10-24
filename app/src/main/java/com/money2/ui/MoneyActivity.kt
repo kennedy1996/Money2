@@ -1,7 +1,8 @@
-package com.money2
+package com.money2.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.money2.R
 
 class MoneyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
