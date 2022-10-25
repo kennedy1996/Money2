@@ -10,11 +10,11 @@ class MoneyWebService {
     private val moneyApiService: MoneyApi =
         InicializatorRetrofit().moneyApi
 
-    suspend fun convertMoney(contry_to: String, country_from: String, money: Double) {
+    suspend fun convertMoney(country_to: String, country_from: String, money: Double) {
         var returnV: MoneyDtos.Money? = null
         try {
             val convertMoneyReturn = moneyApiService
-                .convertMoney(contry_to, country_from, money)
+                .convertMoney(country_to, country_from, money)
 //        returnV = MoneyDtos.Money(convertToScale(convertMoneyReturn.result))
             Log.i("resultConvertMoney", "convertMoney:result=${convertMoneyReturn.result}")
         } catch (e: Exception) {

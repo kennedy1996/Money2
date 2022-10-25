@@ -5,7 +5,7 @@ import com.money2.api.service.MoneyWebService
 class MoneyRepository {
     private val webClient = MoneyWebService()
 
-    suspend fun convertMoney(contry_to: String, country_from: String, money: Double) {
-        return webClient.convertMoney(contry_to, country_from, money)
+    suspend fun convertMoney(country_to: String, country_from: String, money: Double) {
+        return webClient.convertMoney(country_to, country_from, money)
     }
 }
