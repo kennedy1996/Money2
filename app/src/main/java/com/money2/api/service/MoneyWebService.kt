@@ -22,7 +22,8 @@ class MoneyWebService {
                 .convertMoney(country_to, country_from, money)
             returnV = MoneyDtos.Money(
                 convertToScale(convertMoneyReturn.result),
-                convertMoneyReturn.info.quote
+                convertMoneyReturn.info.quote,
+                convertMoneyReturn.query.amount
             )
         } catch (e: Exception) {
             Log.e(TAG, "moneyApiService: ", e)

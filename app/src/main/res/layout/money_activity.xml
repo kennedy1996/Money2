@@ -72,7 +72,7 @@
         android:layout_marginEnd="8dp"
         android:fontFamily="casual"
         android:gravity="center"
-        android:textSize="48sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
@@ -51,19 +50,27 @@ class MoneyActivity : AppCompatActivity() {
         if (!moneyText.isNullOrBlank()) {
             viewModel.convertMoney(country_to, country_from, moneyText.toDouble())
             progressBar.visibility = View.VISIBLE
-            runAfterTime(progressBar, resultField)
+            runAfterTime(progressBar, resultField, country_to, country_from)
         } else money.error = "Invalid Money"
     }
 
     private fun runAfterTime(
         progressBar: ProgressBar,
-        resultField: TextView
+        resultField: TextView,
+        country_to: String,
+        country_from: String
     ) {
         Handler(Looper.getMainLooper()).postDelayed({
             progressBar.visibility = View.GONE
             val moneyConverted = viewModel.getConvertMoney().moneyConverted
             val moneyUnity = viewModel.getConvertMoney().moneyUnity
-            resultField.text = "$moneyUnity\n$moneyConverted"
+            val moneyToConvert = viewModel.getConvertMoney().moneyToConvert
+
+            val textMoneyUnity = "$country_from 1\n=\n$country_to $moneyUnity"
+            val textMoneyConverted = "$country_from $moneyToConvert\n=\n$country_to $moneyConverted"
+
+
+            resultField.text = "$textMoneyUnity\n\n$textMoneyConverted"
         }, 3000)
     }
 }
