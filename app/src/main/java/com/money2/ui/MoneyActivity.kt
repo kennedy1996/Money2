@@ -22,7 +22,10 @@ class MoneyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.money_activity)
+        settingsButton()
+    }
 
+    private fun settingsButton() {
         val money = findViewById<EditText>(R.id.money_activity_insert_money_field)
         val resultField = findViewById<TextView>(R.id.money_activity_result)
         val buttonFromDolarToEuro = findViewById<Button>(R.id.money_activity_button_from_dolar)
@@ -30,15 +33,35 @@ class MoneyActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.money_activity_progressBar)
 
         buttonFromDolarToEuro.setOnClickListener {
-            val moneyText = money.text.toString()
-            if (!moneyText.isNullOrBlank()) {
-                viewModel.convertMoney("USD", "EUR", moneyText.toDouble())
-                progressBar.visibility = View.VISIBLE
-                Handler(Looper.getMainLooper()).postDelayed({
-                    progressBar.visibility = View.GONE
-                    resultField.text = viewModel.getConvertMoney()
-                }, 3000)
-            } else money.error = "Invalid Money"
+            onClickConvert(money, progressBar, resultField, "USD", "EUR")
         }
+        buttonFromEuroToDolar.setOnClickListener {
+            onClickConvert(money, progressBar, resultField, "EUR", "USD")
+        }
+    }
+
+    private fun onClickConvert(
+        money: EditText,
+        progressBar: ProgressBar,
+        resultField: TextView,
+        country_to: String,
+        country_from: String
+    ) {
+        val moneyText = money.text.toString()
+        if (!moneyText.isNullOrBlank()) {
+            viewModel.convertMoney(country_to, country_from, moneyText.toDouble())
+            progressBar.visibility = View.VISIBLE
+            runAfterTime(progressBar, resultField)
+        } else money.error = "Invalid Money"
+    }
+
+    private fun runAfterTime(
+        progressBar: ProgressBar,
+        resultField: TextView
+    ) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            progressBar.visibility = View.GONE
+            resultField.text = viewModel.getConvertMoney()
+        }, 3000)
     }
 }
