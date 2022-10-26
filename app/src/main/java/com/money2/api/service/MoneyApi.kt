@@ -1,6 +1,6 @@
 package com.money2.api.service
 
-import com.money2.api.entities.MoneyDtos
+import com.money2.api.entities.MoneyApiDtos
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -15,5 +15,5 @@ interface MoneyApi {
         @Query("to") country_to: String,
         @Query("from") country_from: String,
         @Query("amount") to: Double
-    ): MoneyDtos.Convert
+    ): MoneyApiDtos.Convert
 }
