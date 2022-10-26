@@ -61,7 +61,9 @@ class MoneyActivity : AppCompatActivity() {
     ) {
         Handler(Looper.getMainLooper()).postDelayed({
             progressBar.visibility = View.GONE
-            resultField.text = viewModel.getConvertMoney()
+            val moneyConverted = viewModel.getConvertMoney().moneyConverted
+            val moneyUnity = viewModel.getConvertMoney().moneyUnity
+            resultField.text = "$moneyUnity\n$moneyConverted"
         }, 3000)
     }
 }
